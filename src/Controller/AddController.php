@@ -35,10 +35,12 @@ class AddController extends AbstractController
             $url = $form["app_GitLink"]->getData();
             `git clone $url`;
             $url_explode = explode("/",$url);
-            $project_name = $url_explode[count($url_explode)-1];
-            $phpcheckstyle = `php ../vendor/phpcheckstyle/phpcheckstyle/run.php --src "/home/mag/IT-Akademy/T17_Proj_Sec-Scanner/test_env/public/$project_name"` ;
+            $project_name = substr(__DIR__,0,-14)."public".DIRECTORY_SEPARATOR.$url_explode[count($url_explode)-1];
             // var_dump($project_name);
-            return new Response('<pre>'.$phpcheckstyle.'</pre>');
+            $phpcheckstyle = `php ../vendor/phpcheckstyle/phpcheckstyle/run.php --src "$project_name"` ;
+            chdir('../vendor/bin');
+            $phpdumpcheck = `var-dump-check "$project_name"`;
+            return new Response('<pre>'.$phpcheckstyle.$phpdumpcheck.'</pre>');
         }
 
         return $this->render('add/index.html.twig', [
