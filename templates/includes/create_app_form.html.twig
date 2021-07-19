@@ -1,0 +1,11 @@
+{{ form_start(form, {'attr': {'class': 'row'}}) }}
+
+    <div class="input-field col s12 m6 l6">
+        {{ form_label(form.app_GitLink) }}
+        {{ form_widget(form.app_GitLink) }}
+    </div>
+
+    <div class="input-field col s12 m12 l12">
+        <input type="submit" value="Enregistrer" class="btn btn-primary">
+    </div>
+{{ form_end(form) }}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Testez votre solution PHP !{% endblock %}
+
+{% block body %}
+    {{ dump(controller_path) }}
+	<div class="container">
+		<div class="row">
+			<div class="col s12 m12 l12">
+				<h4>Indiquez le lien https de votre projet Git :</h4>
+			</div>
+		</div>
+		{% include "includes/create_app_form.html.twig" %}
+	</div>
+{% endblock %}
