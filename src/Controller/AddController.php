@@ -38,8 +38,9 @@ class AddController extends AbstractController
             $project_name = substr(__DIR__,0,-14)."public".DIRECTORY_SEPARATOR.$url_explode[count($url_explode)-1];
             // var_dump($project_name);
             $phpcheckstyle = `php ../vendor/phpcheckstyle/phpcheckstyle/run.php --src "$project_name"` ;
-            chdir('../vendor/bin');
-            $phpdumpcheck = `var-dump-check "$project_name"`;
+            // chdir('../vendor/bin');
+            $phpdumpcheck = `./../vendor/bin/var-dump-check "$project_name"`;
+            // var_dump($phpdumpcheck);
             return new Response('<pre>'.$phpcheckstyle.$phpdumpcheck.'</pre>');
         }
 
