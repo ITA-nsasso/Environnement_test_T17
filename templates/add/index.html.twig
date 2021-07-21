@@ -1,15 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% form_theme form 'bootstrap_5_layout.html.twig' %}
-
 {% block title %}Testez votre solution PHP !{% endblock %}
 
 {% block body %}
 
-	<div class="container">
-		<div class="row">
-			<h4>Indiquez le lien https de votre projet Git :</h4>
-			{% include "includes/create_app_form.html.twig" %}
-		</div>
+	<div class="row">
+		<h4>Indiquez le lien https de votre projet Git :</h4>
 	</div>
+		{% include "includes/create_app_form.html.twig" %}
+
 {% endblock %}
