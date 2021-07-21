@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 use App\Form\AppType;
+use App\Entity\App;
 
 class AddController extends AbstractController
 {
@@ -27,6 +28,9 @@ class AddController extends AbstractController
      */
     public function add(Request $request)
     {
+
+        $app = new App();
+        
         $form = $this->createForm(AppType::class);
 
         $form->handleRequest($request);
@@ -46,9 +50,27 @@ class AddController extends AbstractController
                 //version linux
                 $phpdumpcheck = `./../vendor/bin/var-dump-check "$project_name"`;
             }
+
+            //Insertion des données (liens)
+            $app->setAppGitLink($url);
+            $app->setAppTestDate(new \DateTime('now'));
+            $app->setAppPhpVer(`php -r 'echo PHP_VERSION;'`);
+
+
+            //test doublons (liens)
+             if ($url !== $app->getAppGitLink($url)){
+            
+                $save = $this->getDoctrine()->getManager();
+
+                $save->persist($app);
+
+                $save->flush();
+            } else {
+               //return new Response ("Lien existant");
+            }
             return new Response('<pre>'.$phpcheckstyle.$phpdumpcheck.'</pre>');
         }
-
+        
         return $this->render('add/index.html.twig', [
             'controller_name' => 'Add Controller',
             'controller_path' => realpath("."),

@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\AppRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass=AppRepository::class)
@@ -19,6 +21,9 @@ class App
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\Url(
+     *    message = "The url '{{ value }}' is not a valid url",
+     * )
      */
     private $app_GitLink;
 

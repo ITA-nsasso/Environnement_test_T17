@@ -3,9 +3,10 @@
     <div class="input-field col s12 m6 l6">
         {{ form_label(form.app_GitLink) }}
         {{ form_widget(form.app_GitLink) }}
+        {{ form_errors(form.app_GitLink) }}
+
+        <input type="submit" value="Enregistrer" class="btn btn-primary">
+        <a href="{{ ('/story') }}" class="btn btn-primary">Historique</a>
     </div>
 
-    <div class="input-field col s12 m12 l12">
-        <input type="submit" value="Enregistrer" class="btn btn-primary">
-    </div>
 {{ form_end(form) }}
