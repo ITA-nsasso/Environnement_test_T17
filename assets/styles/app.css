@@ -4,11 +4,41 @@ body {
     background-color: #263238;
 }
 
-h4, .input-field {
-    color: white;
+.container {
+    border: 10px solid gray;
+    height: 90vh;
+    max-height: 700px;
+    overflow: auto;
 }
 
-.btn {
+.table {
+    margin-top: 25px;
+}
+
+h4, span, pre {
+    color: white;
+    margin: auto;
+}
+
+.input-field, span {
+    display: flex;
+    justify-content: center;
+}
+
+.input-field {
+    margin: auto;
+    height: 300px;
+    width: 600px;
+}
+
+.btn.btn-primary {
     margin-top: 10px;
     margin-right: 5px;
+}
+
+.form-error {
+    display: inline-block;
+	position: relative;
+	left: 50%;
+	transform: translateX(-50%);
 }

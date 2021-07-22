@@ -1,12 +1,22 @@
-{{ form_start(form, {'attr': {'class': 'row'}}) }}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
 
-    <div class="input-field col s12 m6 l6">
-        {{ form_label(form.app_GitLink) }}
-        {{ form_widget(form.app_GitLink) }}
-        {{ form_errors(form.app_GitLink) }}
+{{ form_start(form, {'attr': {'class': ''}}) }}
 
-        <input type="submit" value="Enregistrer" class="btn btn-primary">
-        <a href="{{ ('/story') }}" class="btn btn-primary">Historique</a>
+    <span> {{ form_label(form.app_GitLink) }} </span>
+
+    <div class="row input-field">
+        <div class="row">
+            {{ form_widget(form.app_GitLink) }}           
+        </div>
     </div>
 
+    <div class="form-error">
+        {{ form_errors(form.app_GitLink) }}
+    </div>
+ 
+    <div class="row justify-content-center">
+        <input type="submit" value="Enregistrer" class="btn btn-primary col-md-2">
+        <a href="{{ ('/story') }}" class="btn btn-primary col-md-2">Historique</a>
+    </div>
+    
 {{ form_end(form) }}

@@ -12,14 +12,14 @@ use App\Form\AppType;
 use App\Entity\App;
 
 class AddController extends AbstractController
-{
+{   
     /**
      * @Route("/test", name="test")
      */
     public function index(): Response
     {
         return $this->render('add/test.html.twig', [
-            'controller_name' => 'AddController',
+            'controller_name' => 'Add Controller',
         ]);
     }
 
@@ -54,7 +54,7 @@ class AddController extends AbstractController
             //Insertion des données (liens)
             $app->setAppGitLink($url);
             $app->setAppTestDate(new \DateTime('now'));
-            $app->setAppPhpVer(`php -r 'echo PHP_VERSION;'`);
+            $app->setAppPhpVer(PHP_VERSION);
 
 
             //test doublons (liens)
@@ -68,7 +68,10 @@ class AddController extends AbstractController
             } else {
                //return new Response ("Lien existant");
             }
-            return new Response('<pre>'.$phpcheckstyle.$phpdumpcheck.'</pre>');
+            
+            return $this->render('add/test.html.twig', [
+                'tests' => $phpcheckstyle.$phpdumpcheck
+            ]);
         }
         
         return $this->render('add/index.html.twig', [
