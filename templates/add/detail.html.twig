@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Testez votre solution PHP !{% endblock %}
+
+{% block body %}
+	<div class="row">
+		<h4>Détails :</h4>
+	</div>
+		<pre>{{ details }}</pre>
+	<div class="row justify-content-center">
+		<div class="col-md-3">
+			<a href="{{ ('/') }}" class="btn btn-primary">Retour à la page d'accueil</a>
+		</div>
+	</div>
+{% endblock %}
