@@ -30,8 +30,8 @@ class AddController extends AbstractController
     {
 
         $app = new App();
-        
         $form = $this->createForm(AppType::class);
+        $regex = "/[a-zA-Z0-9_].git/m";
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -40,7 +40,11 @@ class AddController extends AbstractController
             `git clone $url`;
             $url_explode = explode("/",$url);
             $project_name = substr(__DIR__,0,-14)."public".DIRECTORY_SEPARATOR.$url_explode[count($url_explode)-1];
-            // var_dump($project_name);
+            
+            if(preg_match($regex,$project_name)) {
+                $project_name = rtrim($project_name,".git");
+            }
+            
             $phpcheckstyle = `php ../vendor/phpcheckstyle/phpcheckstyle/run.php --src "$project_name"` ;
             if(PHP_OS == "WINNT") {
                 //version windows
@@ -58,20 +62,21 @@ class AddController extends AbstractController
 
 
             //test doublons (liens)
-             if ($url !== $app->getAppGitLink($url)){
+            //if ($url !== $app->getAppGitLink($url)){
             
                 $save = $this->getDoctrine()->getManager();
 
                 $save->persist($app);
 
                 $save->flush();
-            } else {
+            //} else {
                //return new Response ("Lien existant");
-            }
+            //}
             
             return $this->render('add/test.html.twig', [
                 'tests' => $phpcheckstyle.$phpdumpcheck
             ]);
+            //return new Response('<pre>'.$phpcheckstyle.$phpdumpcheck.'</pre>');
         }
         
         return $this->render('add/index.html.twig', [
