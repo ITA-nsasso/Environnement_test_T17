@@ -24,7 +24,7 @@ class AddController extends AbstractController
     }
 
     /**
-     * @Route("/add", name="add")
+     * @Route("", name="add")
      */
     public function add(Request $request)
     {
