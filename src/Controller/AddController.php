@@ -61,9 +61,9 @@ class AddController extends AbstractController
                 $save->persist($app);
 
                 $save->flush();
-            //} else {
+            /* } else {
                //return new Response ("Lien existant");
-            //}
+            } */
             
             return $this->render('add/rapport.html.twig', [
                 'rapports' => $phpcheckstyle.$phpdumpcheck
@@ -108,7 +108,7 @@ class AddController extends AbstractController
         $detail = $style->_reporter->reporters[0]->outputFile;
 
         return $this->render('add/detail.html.twig', [
-            'details' => print_r($detail,TRUE),
+            'details' => $detail
         ]);
     }
 

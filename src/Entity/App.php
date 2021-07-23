@@ -37,9 +37,9 @@ class App
      */
     private $app_PhpVer;
 
-    public function getId(): ?int
+    public function getAppPk(): ?int
     {
-        return $this->id;
+        return $this->app_pk;
     }
 
     public function getAppGitLink(): ?string

@@ -13,15 +13,17 @@
                                     <th scope="col">Liens</th>
                                     <th scope="col">Date</th>
                                     <th scope="col">Version</th>
+                                    <th scope="col">Détails</th>
                                 </tr>
                             </thead>
                             <tbody>
                         {% for story in stories %}
                                 <tr> 
-                                    <td>{{ loop.index }}</td>
+                                    <td>{{ story.appPk }}</td>
                                     <td>{{ story.appGitLink }}</td>
                                     <td>{{ story.appTestDate | date('d-m-y h:s:m') }}</td>
                                     <td>{{ story.appPhpVer }}</td>
+                                    <td><a href="{{ path('show', { 'id': story.appPk }) }}" class="btn btn-success">Voir</a></td>
                                 </tr>
                         {% endfor %}
                             </tbody>
@@ -30,7 +32,7 @@
 		</div>
         <div class="row justify-content-center">
             <div class="col-md-3">
-                <a href="{{ ('/add') }}" class="btn btn-primary">Retour à la page d'accueil</a>
+                <a href="{{ ('/') }}" class="btn btn-primary">Retour à la page d'accueil</a>
             </div>
         </div>
 {% endblock %}

@@ -4,7 +4,7 @@
 
 {% block body %}
 	<div class="row">
-		<h4>Détails :</h4>
+		<h4>Détails : {{ show.appGitLink }}</h4>
 	</div>
 		<table class="table table-dark table-striped">
 			<thead>
@@ -16,7 +16,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				{% for item in details %}
+				{% for item in detail %}
 					{% for data in item %}
 						{% for value in data %}
 							<tr>
@@ -30,6 +30,8 @@
 				{% endfor %}
 			</tbody>
         </table>
+		
+		
 	<div class="row justify-content-center">
 		<div class="col-md-3">
 			<a href="{{ ('/') }}" class="btn btn-primary">Retour à la page d'accueil</a>
