@@ -3,7 +3,7 @@
 ## Prérequis
 
 >Vous aurez besoin d'installer Php7.4, Composer et Symfony
-[installation composer](https://www.php.net/manual/fr/install.php)
+[installation php](https://www.php.net/manual/fr/install.php)
 [installation composer](https://getcomposer.org/download/)
 [installation symfony](https://symfony.com/doc/current/setup.html)  
 ## Utiliser notre projet
@@ -48,6 +48,7 @@ Une fois votre base de données lancée sur votre machine, vous pouriez passer �
 Les entités se trouvant déjà dans le projet, il vous suffit de les migrer vers votre bases de données :
 
 ```
+php bin/console doctrine:database:create
 php bin/console doctrine:migrations:diff
 php bin/console doctrine:migrations:migrate
 ```
@@ -62,7 +63,7 @@ symfony local:php:list
 ```
 Si ce n'est pas le cas, définir au besoin la version Php que votre système utilise. Faites de même pour définir la version Php que le projet utilise en suivant les indications données grâce à la commande précédente.
 
-Une fois que cela est défini, lancez la commande suivante :
+Une fois que cela est défini, positionnez vous dans le dossier du projet et lancez la commande suivante :
 
 ```
 symfony server:start

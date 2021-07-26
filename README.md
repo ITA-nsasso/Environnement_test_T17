@@ -3,7 +3,7 @@ Brouillon pour tester les outils php (ver. php7.4)
 
 ## Prérequis
 Pour installer cet environnement de test, je conseille au préalable d'avoir une verison de Php7.4.x d'installé sur votre machine, et s'assurer que Symfony est bien configuré pour utiliser cette version là (voir la commande : symfony local:php:list)  
-Symfony évidemment, personnlement j'ai utilisé la version 4.25.4 mais tant que c'est la même version majeur (4.x.y) je pense qu'il ne devrait pas avoir de soucis.  
+Symfony évidemment, personnellement j'ai utilisé la version 4.25.4 mais tant que c'est la même version majeur (4.x.y) je pense qu'il ne devrait pas avoir de soucis.  
 
 ## Remarques
 Ce projet a été généré et conçu dans un environnement Linux (Debian 10 - Buster). Il est possible que celà vous engendre des problèmes si vous êtes sur un autre OS, mais rien d'irréparable. Dîtes-moi si vous avez des doutes.  
@@ -36,7 +36,7 @@ Le plus gros est fait, il ne faut plus que faire un ```npm run build``` pour rec
 
 ## Lancement du serveur
 Si vous êtes arrivés jusque là, vous avez fini en fait. Il ne manque plus qu'à faire un ```symfony server:start``` et en admettant que la version Php utilisée correspond bien à la version du projet Symfony (voir "Prérequis"), normalement vous êtes opérationnel !  
-Notre page de test se trouve pour l'instant sur le chemin **/add** (localhost:8000/add)  
+Notre page de test devrait se lancer dès que vous vous connectez au site (localhost:8000)  
   
 Je vous invite à tester des dépôts git aléatoirement sur github (tant que c'est un projet contenant du php, évidemment) pour observer les différents résultats obtenus.  
 Je vous donne celui là pour commencer si vous voulez, mais testez en d'autres pour comparer les différents résultats : https://github.com/ITA-nsasso/D11_Dev-Web_IV  
