@@ -36,6 +36,11 @@ class AddController extends AbstractController
 
             # Récupérer le lien depuis le formulaire et cloner le projet en local
             $url = $form["app_GitLink"]->getData();
+
+            if(`git ls-remote $url` ==  null) {
+                throw $this->createNotFoundException('Le lien n\'est pas valide');
+            }
+
             `git clone $url`;
 
             # Récupérer le nom du projet git
