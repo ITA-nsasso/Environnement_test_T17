@@ -41,17 +41,16 @@ class AddController extends AbstractController
                 throw $this->createNotFoundException('Le lien n\'est pas valide');
             }
 
-            if(preg_match($regex,$url)) {
-                $url = rtrim($url,".git");
-            }
-            
             `git clone $url`;
-            
+
             # Récupérer le nom du projet git
             $url_explode = explode("/",$url);
             $project_name = substr(__DIR__,0,-14)."public".DIRECTORY_SEPARATOR.$url_explode[count($url_explode)-1];
             
             # le lien git contenait t'il un ".git" à la fin de la chaîne ? si oui, l'enlever
+            if(preg_match($regex,$project_name)) {
+                $project_name = rtrim($project_name,".git");
+            }
             
             # Lancer les outils de test sur le projet téléchargé :
             # - D'abord l'outil phpcheckstyle
@@ -78,8 +77,7 @@ class AddController extends AbstractController
             
             # Retourner la vue en passant en paramètres la sortie des outils
             return $this->render('add/rapport.html.twig', [
-                'rapports' => $phpcheckstyle.$phpdumpcheck,
-                'url' => $url_explode[count($url_explode)-1]
+                'rapports' => $phpcheckstyle.$phpdumpcheck
             ]);
         }
         
@@ -87,15 +85,16 @@ class AddController extends AbstractController
         return $this->render('add/index.html.twig', [
             'controller_name' => 'Add Controller',
             'controller_path' => realpath("."),
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ]);
     }
     
     /**
-     * @Route("/detail/{url}", name="detail")
+     * @Route("/detail", name="detail")
      */
-    public function detail($url): Response
+    public function detail(): Response
     {
+        
         # Configuration des options pour l'affichage du résultat
         $options['format'] = "array"; // default format
         $formats = explode(',', $options['format']);
@@ -105,9 +104,22 @@ class AddController extends AbstractController
                 "number" => 2
                 )
             );
-                        
+            
+            # Positionnement sur l'entité "App" sur la base de données
+            $repository = $this->getDoctrine()->getRepository(App::class);
+            
+            # Construction de la requête à envoyer à la base de données
+            $query = $repository->createQueryBuilder('app')
+            ->select('app.app_GitLink')
+            ->orderBy('app.app_pk','DESC')
+            ->getQuery();
+
+            # Éxécution de la requête sur la base de données
+            $url = $query->setMaxResults(1)->getOneOrNullResult();
+            
             # Récupérer le nom du projet git
-            $project_name = substr(__DIR__,0,-14)."public".DIRECTORY_SEPARATOR.$url;    
+            $url_explode = explode("/",$url['app_GitLink']);
+            $project_name = substr(__DIR__,0,-14)."public".DIRECTORY_SEPARATOR.$url_explode[count($url_explode)-1];    
 
             # Le mettre en format de tableau
             $mysourcexplode = explode(',', $project_name);
@@ -119,7 +131,7 @@ class AddController extends AbstractController
 
             # Envoyer la partie qui nous intéresse de l'objet à la vue 
             return $this->render('add/detail.html.twig', [
-                'details' => $detail,
+                'details' => $detail
             ]);
         }
         
